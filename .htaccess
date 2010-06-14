@@ -1,0 +1,16 @@
+Options +FollowSymLinks
+
+#dont show contents of folders
+IndexIgnore */*
+
+#turn rewrite on
+RewriteEngine On
+
+#rewrite when its a file
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#rewrite when its a folder
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#rewrite to the index
+RewriteRule . index.php
