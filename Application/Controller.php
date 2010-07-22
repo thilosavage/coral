@@ -1,6 +1,4 @@
 <?php
-// makes the core controller stuff
-// keep in mind that you can use any of these methods inside your controllers
 abstract class Controller {
 
 	protected $_model;
@@ -78,7 +76,7 @@ abstract class Controller {
 		exit;
 	}
 	
-	public function set($name, $value) {
+	public function vars($name, $value) {
 		$this->vars[$name] = $value;
 	}
 }

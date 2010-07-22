@@ -26,14 +26,11 @@ class indexController extends Controller {
 		
 		// simplest
 		$test = new Test(2,6,7,8);
-		$this->set('data',$test->data);
+		$this->vars('data',$test->data);
 		
 		$test->data = $test->data[7];
 		$test->data['test'] = 'sort';
 		$test->save();
-		
-		print_r($test->data);
-		
 		
 	}
 	function documentation(){

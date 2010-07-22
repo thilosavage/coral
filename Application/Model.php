@@ -9,8 +9,10 @@ abstract class Model {
 	var $values = '';
 	var $field = '';
 	var $logic = '';
-
-	public $data = array();
+	
+	public $set = array();
+	public $rows = array();
+	public $row = array();
 
 	function __construct($values=''){
 	
@@ -48,8 +50,9 @@ abstract class Model {
 		$q = $database->query($query);
 		while ($row = mysql_fetch_assoc($q)){
 			$row_id = $row[$this->id_field];
-			$this->data[$row_id] = $row;
+			$this->rows[$row_id] = $row;
 		}
+		$this->row = $row;
 		
 	}
 	
@@ -84,13 +87,13 @@ abstract class Model {
 		}
 		
 		$q .= ' ORDER BY '.$this->esc($this->order_by);
-		echo $q;
+		//echo $q;
 		return $q;
 	}	
 	
 	
 	function save(){
-		if ($this->data[$this->id_field]) {
+		if ($this->set[$this->id_field]) {
 			$this->update();
 		}
 		else {
@@ -106,12 +109,12 @@ abstract class Model {
 	function update() {
 		$database = database::db();
 		$update .= 'UPDATE `'.$this->table.'` SET '.$this->_fields();
-		$update .= sprintf(' WHERE '.$this->esc($this->id_field).'=%s', $this->esc($this->data[$this->id_field]));
+		$update .= sprintf(' WHERE '.$this->esc($this->id_field).'=%s', $this->esc($this->set[$this->id_field]));
 		$database->query($update);
 		return $ret;
 	}
 	function _fields(){
-		while (list ($fieldName, $fieldValue) = each($this->data)) {
+		while (list ($fieldName, $fieldValue) = each($this->set)) {
 			if (!is_numeric($fieldName)){
 				if (!strcmp($fieldName, $this->id_field)) {
 					continue;
@@ -131,7 +134,7 @@ abstract class Model {
 	
 	function delete($value='') {
 		$database = database::db();
-		$value = $value?$value:$this->data[$this->id_field];
+		$value = $value?$value:$this->set[$this->id_field];
 		$q = sprintf('DELETE FROM '.$this->esc($this->table). 
 		'WHERE `'.$this->esc($this->id_field).'`=%s',$this->esc($value));
 		$database->query($q);
@@ -151,12 +154,12 @@ abstract class Model {
 	function getAll(){
 		$this->values = array('id','>0');
 		$this->load();
-		return $this->data;
+		return $this->rows;
 	}
 	
 	function scaffoldInfo($id) {
 		$this->load($id);
-		return $this->data;
+		return $this->rows;
 	}	
 	
 	
