@@ -1,12 +1,3 @@
 <?php
-////////////////////////////////////////////////////////
-//    The index view for the index controller        ///
-//    utilizing the message and button classes       ///
-////////////////////////////////////////////////////////
+echo inc::content($this->id, $data);
 ?>
-The framework executed properly if you see this without errors.
-<pre>
-<?php
-print_r($data);
-?>
-</pre>

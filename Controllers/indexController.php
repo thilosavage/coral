@@ -1,44 +1,40 @@
 <?php
-////////////////////////////////////////////////////////////////////////
-//	The index controller is very simple								 //
-//	To see a more complex example, check the Example controller      //
-///////////////////////////////////////////////////////////////////////
+/**********************************************
+
+	Your index controller is special because it is default
+	
+	If the first argument in the URL string is not recognized
+	as a Controller, it will use the index Controller and index method
+	
+	Controllers and their actions are what decide what
+	the user sees/does. It works like this:
+	
+	yoursite.com/controller/action
+	
+	If I go to yoursite.com/index/sushi
+	It will point to the sushi action of this Controller
+	
+	However, if I go to
+	yoursite.com/not-a-controller
+	
+	It will display content/not-a-controller.php
+	
+	You can always use content files in other
+	Controllers by using
+	$content = inc::content('content-file');
+	
+	This quick fast index/index way is just for speed
+	
+**********************************************/
+
 class indexController extends Controller {
-	
-	
-	
-	function prep(){
-		// do something before anything
-	}
+	// index should be the only method in here
+	// if your site is bigger than one level
+	// create new controllers for your pages
 	function index(){
-		
-		// The Model takes query data in two forms - values and arrays
-
-		// VALUES
-		// array(2,5,6);
-		// this will query for the id_field to be either 2, 5, or 6
-
-		// ARRAYS
-		// array('id'=>2,'name'=>'sushi');
-		// this will query for `id`='2' AND `name` = 'sushi'
-
-		// there are a few ways to run the SQL query
-		
-		// simplest
-		$test = new Test(2,6,7,8);
-		$this->vars('data',$test->data);
-		
-		$test->data = $test->data[7];
-		$test->data['test'] = 'sort';
-		$test->save();
-		
+		$this->layout = '_default';
+		$data['blah'] = '!!!!';
+		$this->vars('data',$data);
 	}
-	function documentation(){
-		// documentation page
-	}
-	function ajax_sushi(){
-		//
-	}
-
 }
 ?>

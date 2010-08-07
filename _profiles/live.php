@@ -1,14 +1,18 @@
 <?php
+/**********************************************
+
+	Configuration for the live site
+	
+**********************************************/
 class  site{
 	const url = 'http://www.thilosavage.com/';
 	const root = '/var/www/html/';
+	const image = 'http://www.thilosavage.com/_images/';
 	
 	const user = 'thilo';
 	const password = 'chicken';
 	
-	const controller = 'index';
-	const action = 'index';
-	const id = '1';
+	const homepage = 'home';
 	const layout = '_default';
 	
 	const db_user = '';

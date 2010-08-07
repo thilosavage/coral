@@ -1,8 +1,13 @@
 <?php
-////////////////////////////////////////////////////////////////
-//    This is the public portion of the admin section        ///
-//    The form is loaded from the inc class. Very nifty      ///
-////////////////////////////////////////////////////////////////
+/**********************************************
+
+	Admin login view
+	
+**********************************************/
 ?>
-<?php echo $error?error::incorrectLogin():''; ?>
+<?php 
+if ($error){
+	echo "<div>".$error."</div>";
+}
+?>
 <?php echo inc::form('admin',$formData); ?>

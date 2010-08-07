@@ -1,10 +1,22 @@
 <?php
+/**********************************************
+
+	All your controllers should extend Controller
+	
+	This is the carburator of the engine that is your site
+	
+	It is fairly straight forward, and only 100 lines,
+	which makes it scalable and understandable
+	
+**********************************************/
 abstract class Controller {
 
-	protected $_model;
-	protected $_controller;
-	protected $_view;
+	protected $model;
+	protected $controller;
+	protected $view;
 
+	var $route = '';
+	var $id = '';
 	var $vars = array();
 	var $action = '';
 	var $layout = site::layout;
@@ -27,12 +39,18 @@ abstract class Controller {
 				exit("<p>Access denied.</p>");
 			}
 		}
-		$this->prep();
+		$this->_prepare();
 		$this->{$this->view}($this->id);
 		$this->render_layout();
 	}	
 	
-	function prep() {
+	// This is mostly to be used in extensions,
+	//  but you can put default _prepare stuff here
+	//  Also you can use this _prepare as well as
+	//  an extension by adding
+	//         self::_prepare();
+	//  within the extended method
+	function _prepare() {
 	}
 	
 	protected function render_layout() {

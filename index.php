@@ -1,12 +1,11 @@
 <?php 
 session_start();  
 
-if (!isset($_SESSION['user'])){
-    session_regenerate_id();
-}
-
+// require autoload
 require_once('Application/__autoload.php');
-require_once('config.php');
+
+// require config
+require_once('Application/config.php');
 
 if(site::debug)log::error("Error with route. You might have config problems. Make sure your doc root is correct in the config");
 $route = new route();

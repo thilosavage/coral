@@ -1,14 +1,18 @@
 <?php
+/**********************************************
+
+	Configuration for the local development site
+	
+**********************************************/
 class  site{
 	const url = 'http://localhost/coral/';
 	const root = '/xampp/htdocs/coral/';
+	const image = 'http://localhost/coral/_images/';
 	
 	const user = 'thilo';
 	const password = 'chicken';
 	
-	const controller = 'index';
-	const action = 'index';
-	const id = '1';
+	const homepage = 'home';
 	const layout = '_default';
 	
 	const db_user = 'maven';

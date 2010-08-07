@@ -18,3 +18,5 @@ else {
 }
 ?>
 
+<a href='<?php echo site::url;?>admin'>Admin Home</a>
+

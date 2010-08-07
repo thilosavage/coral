@@ -11,7 +11,7 @@ if (isset($code)) {
 	"Success.";
 }
 echo "<h3>Editing ".$tableName." table</h3>";
-echo "<h4><a href='".site::url."scaffolding/edit/?table=".$tableName."'>New Entry</a></h4>";
+echo "<h4><a href='".site::url."scaffolding/edit/?table=".$tableName."'>New Row</a></h4>";
 echo "<table border='1' cellpadding='5' cellspacing='0'>";
 
 // column headers
@@ -25,15 +25,21 @@ foreach ($fields as $field => $dataType) {
 	$i = 0;
 }
 echo "</tr>";
-foreach ($rows as $row) {
-	echo "<tr>";
-	echo "<td><a href='".site::url."scaffolding/edit/".$row[$idField]."?table=".$tableName."'>Edit</td>";
-	echo "<td><a href='".site::url."scaffolding/delete/".$row[$idField]."?table=".$tableName."'>Delete</td>";
-	foreach ($fields as $field => $dataType) {
-		echo "<td>".$row[$field]."</strong></td>";
+if ($rows) {
+	foreach ($rows as $row) {
+		echo "<tr>";
+		echo "<td><a href='".site::url."scaffolding/edit/".$row[$idField]."?table=".$tableName."'>Edit</td>";
+		echo "<td><a href='".site::url."scaffolding/delete/".$row[$idField]."?table=".$tableName."'>Delete</td>";
+		foreach ($fields as $field => $dataType) {
+			echo "<td>".$row[$field]."</strong></td>";
+		}
+		echo "</tr>";
 	}
-	echo "</tr>";
 }
+else {
+	echo "No rows found";
+}
+
 echo "</table>";
 echo "<a href='".site::url."scaffolding'>Return to Tables List</a>";
 ?>

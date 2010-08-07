@@ -6,7 +6,10 @@ class factory {
 			return new $controllerName($route);
 		}
 		else {
-			exit('<p>Controller not found</p>');
+			$route->id = $route->controller?$route->controller:site::homepage;
+			$route->controller = 'index';
+			$route->view = 'index';
+			return new indexController($route);
 		}	
 	}
 }

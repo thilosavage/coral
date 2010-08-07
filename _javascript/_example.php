@@ -1,13 +1,22 @@
 <script>
-////////////////////////////////////////////////////////////////////////////////////
-//    this example.php javascript has everything to do with the Example Controller
-//    for organization i invented this naming I call CTA:
-//         [ControllerName][Thing][Action]
+/**********************************************
 
-//    the "ControllerName" is 'example' 
-//   the "Thing" is the 'Quote content area' aka 'Quote'
-//   the "Action" is 'load', which is what the function does
-////////////////////////////////////////////////////////////////////////////////
+	To keep everything organized, use this naming convention:
+	[Controller][Thing][Action]
+	
+	For example, this file is _example.php
+	So all the AJAX in this file will call to the Example controller
+	And all the function names will start with example
+	A function that loads a quote would look like
+	
+**********************************************/
 
-// exampleQuoteLoad will "Load" the "Quote" on the "Example" page
+function exampleQuoteLoad(){
+	// siteUrl is set in js.php
+	// all PHP ajax actions are appended by ajax_
+	$.post(siteUrl+'example/ajax_exampleQuoteLoad',function(data){
+		$('#quote').html(data.quote);
+	},'json');
+}
+
 </script>

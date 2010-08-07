@@ -19,8 +19,8 @@ class Admin extends Controller {
 	var $unprotected_actions = array();
 	
 	// keep out the riff raff
-	function prepare() {
-		if (!in_array($this->_view, $this->unprotected_actions) && !isset($_SESSION['admin'])) {
+	function _prepare() {
+		if (!in_array($this->view, $this->unprotected_actions) && !isset($_SESSION['admin'])) {
 			$this->session('return_to', $this->route);
 			$this->redirect('admin/index');
 		}

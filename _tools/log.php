@@ -1,10 +1,28 @@
 <?php
-// 		write to a log file in times of need
-// 		just put:
-//      	log::set($dataYouWantPut); 
-//		and you can find it in the root area
-//		or write a custom log file with:
-//          log::write($data,$file,$path);
+/**********************************************
+
+	Write to a log file in times of need
+	
+	Put:
+		log::set($string for the log file); 
+	
+	and you can find the log file in the site's main directory
+	
+	You can write a custom log file with:
+		log::write($data,$file,$path);
+	
+	To record an error, do
+		log::error('There was an error.....);
+	
+	The difference between the error and the log is that
+	the log file will write everything at the end of script execution
+	if the script fails, nothing will be written to the log
+	
+	The error will write itself as long as the script gets to the error
+	
+**********************************************/
+
+
 class log {
 	static $data;
 	public static function set($data){

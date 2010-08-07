@@ -9,23 +9,32 @@
 $i = 1;
 echo form::start(site::url."scaffolding/save/".$id."?table=".$table);
 
-foreach ($fields as $name => $field) {
-	if (!$id){
-		//unset($field);
-		$field = '';
-	}
-	if ($i == 1) {
-		if ($id){
-			echo $name.": ".$field."<br>";
+if ($fields){
+	foreach ($fields as $name => $field) {
+		if (!$id){
+			//unset($field);
+			$field = '';
 		}
+		if ($i == 1) {
+			if ($id){
+				echo $name.": ".$field."<br>";
+			}
+		}
+		else {
+			echo $name.": ".form::input('data['.$name.']',$field)."<br>";	
+		}
+		$i = 0;
 	}
-	else {
-		echo $name.": ".form::input('data['.$name.']',$field)."<br>";	
-	}
-	$i = 0;
+	
+	echo form::submit('submit','submit');
+	echo "</form>";
+
+	
 }
-echo form::submit('submit','submit');
-echo "</form>";
+else {
+	echo "Apparently this table has no fields.. you're doing something incredible wrong.";
+}
+
 echo "<p><a href='".site::url."scaffolding/table/".$table."'>Return to ".$table." table</a></p>";
-echo "<p><a href='".site::url."scaffolding'>Return to Tables List</a></p>";
+echo "<p><a href='".site::url."scaffolding'>Return to Tables List</a></p>";	
 ?>

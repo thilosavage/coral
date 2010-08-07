@@ -13,11 +13,11 @@ class route {
 		$_SESSION['physAdd'] = $this->route;
 		$this->full = $this->route;
 		$urlArgs = explode('/', $this->route);
-		$this->controller = ($urlArgs[0])?$urlArgs[0]:site::controller;
-		$this->view = (@$urlArgs[1])?$urlArgs[1]:site::action;
+		$this->controller = ($urlArgs[0])?$urlArgs[0]:'';
+		$this->view = (@$urlArgs[1])?$urlArgs[1]:'index';
 		if (isset($urlArgs[2])){
 			$hasID = explode("?",$urlArgs[2]);
-			$this->id = ($hasID[0])?$hasID[0]:site::id;
+			$this->id = ($hasID[0])?$hasID[0]:'';
 		}
 	}
 	
