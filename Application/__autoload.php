@@ -20,6 +20,7 @@ function __autoload($class_name) {
 	foreach ($_AUTOLOAD as $directory){
 		if (file_exists(site::root.$directory.$class_name.'.php')){
 			require_once site::root.$directory.$class_name .'.php';
+			break;
 		}
 	}
 }

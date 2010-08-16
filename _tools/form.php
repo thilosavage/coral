@@ -78,45 +78,24 @@ class form {
 		return $id.$name.$value.$class;
 	}	
 	
-	public static function select($name,$value,$vals,$names,$default=null,$extra='',$autosubmit=false) {
-	
-		$selected = false;
-		$sOpt = '';
-		
-		$ret = "<select name=".$name;
+	public static function select($id,$value,$data,$name='',$class='',$autosubmit=false) {
+		$ret = "<select ";
+		$ret .= self::_vars($id,$value,$name, $class).$extra;
 		if ($autosubmit) {
-			$ret .= " onchange=\"this.form.submit();\"";
-		}
-		if ($extra) {
-			$ret .= " ".$extra;
-		}
-		$ret .= ">";
-		
-		while (list(, $name) = each($names)) {
-			if (is_array($vals)) {
-				list(, $val) = each($vals);
-			} else {
-				$val = $name;
-			}
-			$sOpt .= "<option ";
-			$sOpt .= "value=".$val;
-			if (!strcmp($value, $val)) {
-				$sOpt .= " selected";
-				$selected = true;
-			}
-			$sOpt .= ">".htmlentities($name)."</option>";
-		}
-
-		if ($default){
-			$ret .= "<option ";
-			$ret .= "value=".$default['val']." ";
-			if (!$selected)
-				$ret .= "selected";
-			$ret .= ">".$default['name']."</option>";			
+			$ret .= " onchange='this.form.submit();'";
 		}		
-		$ret .= $sOpt;
+		$ret .= ">";		
+		foreach ($data as $key => $val){
+			$ret .= "<option name='".$key."'";
+			if ($key == $value){
+				$ret .= " selected";
+			}
+			$ret .= ">";
+			$ret .= $val;
+			$ret .= "</option>";
+		}
 		$ret .= "</select>";
-		return($ret);
+		return $ret;
 	}
 }
 ?>

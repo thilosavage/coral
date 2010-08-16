@@ -3,6 +3,8 @@
 
 	$_PROFILES is an array of all the locations of your website
 	
+	For every server that your site exists, you will have a line here
+	
 	Using this, you can have your website synchronized in ten
 	places and have it work on all of them without annoying ifs
 	
@@ -11,8 +13,15 @@
 	$_PROFILES['YOUR DOCUMENT ROOT'] = '/path_to_framework/_profiles/your_name.php';
 	
 **********************************************/
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////  PUT YOUR CONFIGURATION PATHS HERE  ////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $_PROFILES['D:/xampp/htdocs'] = '/coral/_profiles/local';
-$_PROFILES['/home/jumping4/public_html/ts'] = '/_profiles/live';
+$_PROFILES['YOUR DOCUMENT ROOT'] = '/PATH/_profiles/local';
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // library classes
 $_AUTOLOAD[] = "_library/";
@@ -36,6 +45,11 @@ if (file_exists($profile)){
 	require_once($profile);
 }
 else {
-	exit('Error - No configuration profile found. Check the config file.');
+	echo "<p>Coral has been installed, but no configuration profile has been set.</p>";
+	echo "Go to Application/config.php and add this line:<br>";
+	echo "<em>\$_PROFILES['".$_SERVER['DOCUMENT_ROOT']."'] = '/newsite/_profiles/local';</em>";
+	echo "<a href='http://www.thilosavage.com/coral/installation' target='_blank'>Read Documentation</a>";
+	exit;
 }
+
 ?>

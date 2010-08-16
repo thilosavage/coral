@@ -7,13 +7,21 @@ require_once('Application/__autoload.php');
 // require config
 require_once('Application/config.php');
 
-if(site::debug)log::error("Error with route. You might have config problems. Make sure your doc root is correct in the config");
+if (!class_exists(log)){
+	echo "<p>Your configuration profile is working, but there is an error in your settings</p>";
+	echo "<p>Open the configuration profile for this installation of Coral (i.e. _profiles/local.php)</p>";
+	echo "<p>Check your root constant and make sure it's your document root, including the path to your site</p>";
+	echo "<p>Example:<br>";
+	echo "const root = 'D:/xampp/htdocs/yoursite/'<br>";
+	echo "or<br>";
+	echo "const root = '/var/www/html/yoursite/'<br>";
+	echo "(include the trailing slash)</p>";
+	echo "<a href='http://www.thilosavage.com/coral/installation' target='_blank'>Read Documentation</a>";
+	exit;
+}
+
 $route = new route();
-
-if(site::debug)log::error("Factory error. Perhaps this controller doesn't exist. Check Applications/factory.php. ");
 $controller = factory::build($route);
-
-if(site::debug)log::error("There was an error running this controller. ");
 $controller->run($route);
 
 if(site::debug)log::error("The application finished without any errors.");

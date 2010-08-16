@@ -200,7 +200,12 @@ abstract class Model {
 			$q = $database->query($query);
 			while ($row = @mysql_fetch_assoc($q)){
 				$row_id = $row[$this->id_field];
-				$this->rows[$row_id] = $this->rowHandler($row);
+				if ($this->use_id_values) {
+					$this->rows[$row_id] = $this->rowHandler($row);
+				}
+				else {
+					$this->rows[] = $this->rowHandler($row);
+				}
 				$this->row = $this->rowHandler($row);
 			}
 		}

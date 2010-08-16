@@ -23,7 +23,7 @@ class str {
 	}
 	
 	// clean a string to be just letters
-	public static function justLetters($str){
+	public static function just_letters($str){
 		return preg_replace("/[^a-zA-Z]/", "", $str);
 	}
 }
