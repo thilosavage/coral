@@ -1,4 +1,8 @@
 <?php
+
+// if you change this, you'll have to change it 3 times in the .htaccess as well
+define("CO_WEB_PATH","web");
+
 /**********************************************
 
 	$_PROFILES is an array of all the locations of your website
@@ -17,36 +21,48 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////  PUT YOUR CONFIGURATION PATHS HERE  ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$_PROFILES['D:/xampp/htdocs'] = '/coral/_profiles/local';
-$_PROFILES['YOUR DOCUMENT ROOT'] = '/PATH/_profiles/local';
+$_PROFILES['D:/xampp/htdocs'] = 'local';
+$_PROFILES['/var/www/html'] = 'live';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// library classes
-$_AUTOLOAD[] = "web/library/";
-
-// helper classes
-$_AUTOLOAD[] = "web/buttons/";
-$_AUTOLOAD[] = "web/messages/";
-$_AUTOLOAD[] = "_helpers/";
-
-// framework classes
+// add any folder with class files
+// this will be used by the __autoload function in Application/__autoload.php
+$_AUTOLOAD[] = "helpers/";
 $_AUTOLOAD[] = "Application/";
 $_AUTOLOAD[] = "Models/";
 $_AUTOLOAD[] = "Controllers/";
 
 
-
 // load configuration profile
 $docroot = $_SERVER['DOCUMENT_ROOT'];
-$profile = $docroot.$_PROFILES[$docroot].'.php';
+
+if (strpos($_SERVER['SCRIPT_FILENAME'],'/'.CO_WEB_PATH.'/')) {
+	$d = "\$web = preg_replace(\"/\/".CO_WEB_PATH."\/([a-zA-Z\/.]*)/\",\"\",\$_SERVER['SCRIPT_FILENAME']);";
+	eval($d);
+	$profile = $web.'/configs/'.$_PROFILES[$docroot].'.php';
+}
+else {
+	$ars = array($docroot,'index.php');
+	$sitepath = str_replace($ars ,'',$_SERVER['SCRIPT_FILENAME']);
+	$profile = $docroot.$sitepath.'configs/'.$_PROFILES[$docroot].'.php';
+}
+
 if (file_exists($profile)){
 	require_once($profile);
 }
 else {
 	require_once('Application/error.php');
 	error::run('no_config_file');
+}
+
+class config {
+	function __construct() {
+		ini_set('display_errors', 1);
+		error_reporting(E_STRICT);
+		error_reporting(E_ALL);	
+	}
 }
 
 ?>

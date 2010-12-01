@@ -1,2 +1,2 @@
-
-[log#1125]
+Unknown column 'firstname' in 'field list'
+[log#1512]

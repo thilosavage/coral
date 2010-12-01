@@ -8,6 +8,7 @@ $self = $css_folder.'/'.end(explode('/',$_SERVER['PHP_SELF']));
 $docRoot = str_replace($self,'',$_SERVER['SCRIPT_FILENAME']);
 $docRoot = str_replace('web/','',$docRoot);
 
+
 echo "/*";
 require_once($docRoot.'config.php');
 echo "*/";
