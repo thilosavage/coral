@@ -6,16 +6,21 @@ IndexIgnore */*
 #turn rewrite on
 RewriteEngine On
 
-#rewrite when its a file
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} (.+)/images/.+$ [NC]
+RewriteRule ^(.*)$ /%1/web/$1 [NC,L]
 
-#rewrite when its a folder
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} (.+)/javascript/.+$ [NC]
+RewriteRule ^(.*)$ /%1/web/$1 [NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} (.+)/styles/.+$ [NC]
+RewriteRule ^(.*)$ /%1/web/$1 [NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [NC,L]
 
-#rewrite to the index
-RewriteRule . index.php
 
-#php rendered in css and js files
-<FilesMatch "\.(css|js)$">
- SetHandler application/x-httpd-php
-</FilesMatch>
+#http://localhost/coral/images/loader.gif

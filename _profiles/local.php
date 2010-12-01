@@ -9,6 +9,8 @@ class  site{
 	const root = '/xampp/htdocs/coral/';
 	const image = 'http://localhost/coral/_images/';
 	
+	const folder = 'web';
+	
 	const user = 'thilo';
 	const password = 'chicken';
 	

@@ -1,3 +1,3 @@
 <?php
-echo inc::content($this->id, $data);
+echo inc::page($this->id, $data);
 ?>
