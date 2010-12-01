@@ -1,2 +1,0 @@
-The application finished without any errors.
-[error#1654]

@@ -1,2 +1,0 @@
-Unknown column 'firstname' in 'field list'
-[log#1512]
