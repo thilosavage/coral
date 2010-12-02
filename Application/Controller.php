@@ -54,7 +54,7 @@ abstract class Controller {
 	}
 	
 	protected function render_layout() {
-		$path = site::root.site::folder.'/layouts/'.$this->layout.'.php';
+		$path = site::root.CO_WEB_PATH.'/layouts/'.$this->layout.'.php';
 		if (file_exists($path)) {
 			include $path;
 		}

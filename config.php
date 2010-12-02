@@ -41,12 +41,12 @@ $docroot = $_SERVER['DOCUMENT_ROOT'];
 if (strpos($_SERVER['SCRIPT_FILENAME'],'/'.CO_WEB_PATH.'/')) {
 	$d = "\$web = preg_replace(\"/\/".CO_WEB_PATH."\/([a-zA-Z\/.]*)/\",\"\",\$_SERVER['SCRIPT_FILENAME']);";
 	eval($d);
-	$profile = $web.'/configs/'.$_PROFILES[$docroot].'.php';
+	$profile = $web.'/servers/'.$_PROFILES[$docroot].'.php';
 }
 else {
 	$ars = array($docroot,'index.php');
 	$sitepath = str_replace($ars ,'',$_SERVER['SCRIPT_FILENAME']);
-	$profile = $docroot.$sitepath.'configs/'.$_PROFILES[$docroot].'.php';
+	$profile = $docroot.$sitepath.'servers/'.$_PROFILES[$docroot].'.php';
 }
 
 if (file_exists($profile)){
