@@ -8,7 +8,7 @@
 class scaffoldingController extends Admin {
 
 	// use the admin layout
-	var $layout = '_admin';
+	var $layout = 'admin';
 	
 	// i dont want any of these pages allowed to the public
 	var $unprotected_actions = array();

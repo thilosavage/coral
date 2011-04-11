@@ -5,9 +5,9 @@
 	
 **********************************************/
 ?>
-<?php 
+<?php
 if ($error){
-	echo "<div>".$error."</div>";
+	echo "<div>There was an error. Try again</div>";
 }
 ?>
-<?php echo inc::form('admin',$formData); ?>
+<?php echo inc::form('admin-login',$data); ?>

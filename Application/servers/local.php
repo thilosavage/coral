@@ -9,8 +9,8 @@ class site extends config{
 	const root = 'C:/x/htdocs/coral/';
 	const image = 'http://localhost/coral/images/';
 	
-	const user = 'thilo';
-	const password = 'chicken';
+	const user = 'admin';
+	const password = '123';
 	
 	const homepage = 'home';
 	const layout = 'default';

@@ -37,7 +37,7 @@ if ($rows) {
 	}
 }
 else {
-	echo "No rows found";
+	echo "<tr><td>No rows found</td></tr>";
 }
 
 echo "</table>";

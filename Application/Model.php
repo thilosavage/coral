@@ -10,8 +10,8 @@
 	
 	C - create - see the save() method
 	R - retrieve - see the load() method
-	U - update - also done with the save() method
-	D - delete - see the delete() method
+	U - update - also see the save() method
+	D - delete - see the delete method
 
 	Everything else is just helping these four things
 	
@@ -156,6 +156,7 @@ abstract class Model {
 			if ($id_field) {
 				$this->field = $id_field;
 			}
+			
 			$this->load();
 		}
 	}
@@ -171,9 +172,13 @@ abstract class Model {
 		// $exampleobj->load(array(1,3,7));		
 	function load($values = ''){
 	
-		
 		if ($values){
-			if (is_array($values)){
+		
+		
+			if ($values == 'all') {
+				$this->values = array($this->id_field.'>'=>'0');
+			}		
+			else if (is_array($values)){
 				$this->values = $values;
 			}
 			else {
@@ -199,11 +204,15 @@ abstract class Model {
 			
 			$q = $database->query($query);
 			while ($row = @mysql_fetch_assoc($q)){
+
 				$row_id = $row[$this->id_field];
+
 				if ($this->use_id_values) {
+				
 					$this->rows[$row_id] = $this->rowHandler($row);
 				}
 				else {
+					print_r($row);
 					$this->rows[] = $this->rowHandler($row);
 				}
 				$this->row = $this->rowHandler($row);
@@ -347,7 +356,7 @@ abstract class Model {
 	// clear the object
 	function clear(){
 		$this->row = null;
-		$this->data = null;
+		$this->rows = array();
 		$this->query = '';
 		$this->values = null;
 		$this->set = null;
@@ -387,10 +396,15 @@ abstract class Model {
 		if ($this->sort_order){
 			$q .= ' ORDER BY '.$this->_esc($this->sort_order);
 		}
+		else {
+			$q .= ' ORDER BY '.$this->_esc($this->order_by);
+		}
+		
 		if ($this->limit){
 			$q .= ' LIMIT '.$this->limit;
 		}
 		$this->query = $q;
+
 		return $q;
 	}		
 	// inserts row into database
@@ -398,16 +412,20 @@ abstract class Model {
 		$database = database::db();
 		$insert = 'INSERT INTO `'.$this->_esc($this->table).'` SET '.$this->_fields();
 		$database->query($insert);
+		
 		$this->query = $insert;
+		
+		//return $ret;
 	}
 	
 	// updates row in database
 	function _update() {
 		$database = database::db();
-		$update .= 'UPDATE `'.$this->table.'` SET '.$this->_fields();
+		$update = 'UPDATE `'.$this->table.'` SET '.$this->_fields();
 		$update .= sprintf(' WHERE '.$this->_esc($this->id_field).'=%s', $this->_esc($this->set[$this->id_field]));
 		$database->query($update);
 		$this->query = $update;
+		//return $ret;
 	}
 	
 	// generate sql fields
@@ -418,7 +436,7 @@ abstract class Model {
 				if (!strcmp($fieldName, $this->id_field)) {
 					continue;
 				}
-				if ($fields) {
+				if (!empty($fields)) {
 					$fields .= ', ';
 				}
 				$fields .= sprintf('`'.$this->_esc($fieldName).'`=\'%s\'', $this->_esc($fieldValue));

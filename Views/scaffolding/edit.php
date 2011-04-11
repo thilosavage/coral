@@ -32,7 +32,7 @@ if ($fields){
 	
 }
 else {
-	echo "Apparently this table has no fields.. you're doing something incredible wrong.";
+	echo "There was an error.. are you sure this table exists in the database?";
 }
 
 echo "<p><a href='".site::url."scaffolding/table/".$table."'>Return to ".$table." table</a></p>";

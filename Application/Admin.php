@@ -15,12 +15,12 @@
 **********************************************/
 
 class Admin extends Controller {
-	var $layout = '_admin';
+	var $layout = 'admin';
 	var $unprotected_actions = array();
 	
 	// keep out the riff raff
 	function _prepare() {
-		if (!in_array($this->view, $this->unprotected_actions) && !isset($_SESSION['admin'])) {
+		if (!in_array($this->action, $this->unprotected_actions) && !isset($_SESSION['admin'])) {
 			$this->session('return_to', $this->route);
 			$this->redirect('admin/index');
 		}
@@ -28,12 +28,12 @@ class Admin extends Controller {
 	
 	// process login information
 	function _process(){
-		if ($_POST['name'] == site::user && $_POST['pass'] == site::password) {
+		if ($_POST['user'] == site::user && $_POST['pass'] == site::password) {
 			$_SESSION['admin'] = 1;
 			$this->redirect('admin/manager');
 		}
 		else {
-			return true;
+			return '1';
 		}
 	}
 	

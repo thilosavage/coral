@@ -16,11 +16,12 @@ class database {
         return self::$instance;
     }
 	
-	public function query($query){
+	public static function query($query){
 		return mysql_query($query);
 	}
 	
 	public static function models() {
+	
 		$models = '';
 		$directory = opendir(site::root.'Models');
 		

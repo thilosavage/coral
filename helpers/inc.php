@@ -52,7 +52,7 @@ class inc{
 
 	public static function form($form,$data=array()){
 		ob_start();
-		include(site::root.site::folder.'/forms/'.$form.'.php');
+		include(site::root.'_forms/'.$form.'.php');
 		$bah = ob_get_contents();
 		ob_end_clean();
 		return $bah;

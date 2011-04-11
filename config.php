@@ -34,7 +34,6 @@ $_AUTOLOAD[] = "Controllers/";
 $docroot = $_SERVER['DOCUMENT_ROOT'];
 
 if (empty($_SERVERS[$docroot])) {
-	require_once('Application/error.php');
 	error::run('no_config_file');
 }
 // if a file is being requested in public folder
@@ -54,7 +53,6 @@ if (file_exists($profile)){
 	require_once($profile);
 }
 else {
-	require_once('Application/error.php');
 	error::run('no_config_file');
 }
 

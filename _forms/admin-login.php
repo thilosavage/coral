@@ -1,0 +1,1 @@
+<?phpecho form::start(site::url.'admin/index');echo "User: ".form::input('user',$data['user']);echo "<br />";echo "Pass: ".form::pass('pass');echo "<br />";echo form::submit('login','Login');echo form::end();?>

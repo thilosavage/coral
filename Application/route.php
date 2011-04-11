@@ -4,21 +4,46 @@
 class route {
 	var $route;
 	var $controller = '';
-	var $model = '';
-	var $view = '';
+	var $action = '';
 	var $id = '';
 	var $full = '';
 	public function __construct() {
+	
 		$this->route = self::get();
+		$this->action = site::homepage;
+		
 		$_SESSION['physAdd'] = $this->route;
 		$this->full = $this->route;
 		$urlArgs = explode('/', $this->route);
-		$this->controller = ($urlArgs[0])?$urlArgs[0]:'';
-		$this->view = (@$urlArgs[1])?$urlArgs[1]:'home';
-		if (isset($urlArgs[2])){
+		
+		if (!empty($urlArgs[0])){
+			$hasController = explode("?",$urlArgs[0]);
+			$this->controller =$hasController[0];
+		}
+
+		if (!empty($urlArgs[1])){
+			$hasAction = explode("?",$urlArgs[1]);
+			$this->action = $hasAction[0];
+		}
+		else {
+			$this->action = 'index';
+		}
+		
+		if (!empty($urlArgs[2])){
 			$hasID = explode("?",$urlArgs[2]);
 			$this->id = ($hasID[0])?$hasID[0]:'';
 		}
+		
+		// use a page instead of controller
+		if (!$this->controller || !class_exists($this->controller.'Controller')) {
+
+			$this->id = $this->controller?$this->controller:site::homepage;
+			$this->action = 'index';
+			$this->controller = 'index';
+
+		}		
+		
+		
 	}
 	
 	// get your route

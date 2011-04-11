@@ -2,6 +2,7 @@
 class error {
 
 	public static function run($error) {
+		require_once('Application/error.php');
 		echo self::$error();
 		exit;
 	}

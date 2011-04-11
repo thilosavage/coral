@@ -16,9 +16,9 @@ class exampleController extends Controller {
 		// do something before anything to prepare the controller
 		
 		// say you want every action in the Example Controller to 
-		// make a session increment 1
+		// make a session increment 1, do 
 		
-		$_SESSION['useless_incrementor']++;
+		//$_SESSION['useless_incrementor']++;
 		
 		// this will add one any time someone access this
 		//controller no matter what action

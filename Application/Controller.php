@@ -11,26 +11,24 @@
 **********************************************/
 abstract class Controller {
 
-	protected $model;
 	protected $controller;
-	protected $view;
+	protected $action;
 
 	var $route = '';
 	var $id = '';
-	var $vars = array();
-	var $action = '';
+	var $vars = array();	
+	var $view = '';
 	var $layout = site::layout;
 	
 	public function __construct($route) {
 		$this->route = $route->full;
 		$this->controller = $route->controller;
-		$this->model = $route->model;
-		$this->view = $route->view;
+		$this->action = $route->action;
 		$this->id = $route->id;
 	}      
 
 	public function run() {
-		if (substr($this->view,0,5) == "ajax_"){
+		if (substr($this->action,0,5) == "ajax_"){
 		$request = $_SERVER[ 'HTTP_X_REQUESTED_WITH' ];
 		if ($request == 'XMLHttpRequest' || site::debug) {
 				$this->layout = 'ajax';
@@ -39,8 +37,9 @@ abstract class Controller {
 				exit("<p>Access denied.</p>");
 			}
 		}
+		
 		$this->_prepare();
-		$this->{$this->view}($this->id);
+		$this->{$this->action}($this->id);
 		$this->render_layout();
 	}	
 	
@@ -63,7 +62,7 @@ abstract class Controller {
 		}
 	}
 	
-	protected function render_view() {
+	protected function render_action() {
 	
 		if ($this->vars) {
 			foreach ($this->vars as $_name => $_value) {
@@ -72,7 +71,7 @@ abstract class Controller {
 		}	
 	
 		$ajaxExt = $this->layout=='ajax'?'/ajax':'';
-		$path = site::root.'Views/'.$this->controller.$ajaxExt.'/'.str_replace('ajax_','',$this->view).'.php';
+		$path = site::root.'Views/'.$this->controller.$ajaxExt.'/'.str_replace('ajax_','',$this->action).'.php';
 	
 		if (file_exists($path)) {
 			include $path;

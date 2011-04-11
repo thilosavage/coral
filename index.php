@@ -8,9 +8,7 @@ require_once('Application/__autoload.php');
 require_once('config.php');
 
 if (!class_exists('log')){
-	require_once('Application/error.php');
 	error::run('settings_error');
-	exit;
 }
 
 $route = new route();

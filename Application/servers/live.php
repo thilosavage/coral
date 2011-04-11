@@ -9,8 +9,8 @@ class site extends config{
 	const root = '/var/www/html/';
 	const image = 'http://www.thilosavage.com/images/';
 	
-	const user = 'thilo';
-	const password = 'chicken';
+	const user = 'admin';
+	const password = '123';
 	
 	const homepage = 'home';
 	const layout = 'default';
@@ -20,7 +20,7 @@ class site extends config{
 	const db_name = '';
 	const db_url = 'localhost';
 	
-	const debug = 1;
+	const debug = 0;
 	
 	function __construct(){
 		ini_set('display_errors', 0);

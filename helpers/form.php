@@ -19,41 +19,41 @@
 **********************************************/
 class form {
 
-	public function start($action='',$method='post',$multipart=false,$extra='') {
+	public static function start($action='',$method='post',$multipart=false,$extra='') {
 		$action = $action?$action:site::url;
 		$method = 'method="'.$method.'" ';
 		$multipart = $multipart?'enctype="multipart/form-data" ':'';
 		return '<form action="'.$action.'" '.$method.$multipart.$extra.'>';
 	}
 	
-	public function checkbox($name,$value,$check='',$extra='',$id='') {
+	public static function checkbox($name,$value,$check='',$extra='',$id='') {
 		$checked = (($check==='' && $_POST[$name]) || $check)?' checked':'';
 		return '<input type="checkbox" '.self::_vars($id,$value,$name, $class).$extra.$checked.'>';
 	}
 	
-	public function radio($name,$value,$check='',$extra='',$id='') { 
+	public static function radio($name,$value,$check='',$extra='',$id='') { 
 		$checked = (($check==='' && $_POST[$name]) || $check)?' checked':'';
 		return '<input type="radio" '.self::_vars($id,$value,$name, $class).$extra.$checked.'>';	
 	}
 	
-	public function input($name, $value='',$class='',$extra='',$id='') {
+	public static function input($name, $value='',$class='',$extra='',$id='') {
 		return '<input type="text" '.self::_vars($id,$value,$name, $class).' '.$extra.'>';
 	}
 	
-	public function file($name,$value='',$class='',$extra='',$id='') {
+	public static function file($name,$value='',$class='',$extra='',$id='') {
 		return '<input type="file" '.self::_vars($id,$value,$name, $class).' '.$extra.'>';
 	}	
 	
-	public function hidden($name,$value='',$length='',$maxlen='',$extra='',$id='') {
+	public static function hidden($name,$value='',$length='',$maxlen='',$extra='',$id='') {
 		return '<input type="hidden" '.self::_vars($id,$value,$name, $class).' '.$extra.'>';
 	}	
 	
-	public function password($name, $value='',$class='',$extra='',$id='') {
+	public static function pass($name, $value='',$class='',$extra='',$id='') {
 		return '<input type="password" '.self::_vars($id,$value,$name, $class).' '.$extra.'>';
 	}
 	
-	public function submit($name,$value,$extra='',$id='',$src='') {
-		return '<input type="submit" '.self::_vars($id,$value,$name, $class).$extra.'>';
+	public static function submit($name,$value,$class='',$extra='',$id='',$src='') {
+		return '<input type="submit" '.self::_vars($id,$value,$name,$class).$extra.'>';
 	}	
 
 	public static function text($name,$value='',$class='',$extra='',$rows=5,$cols=35,$id='') {
@@ -70,7 +70,7 @@ class form {
 		return "</form>";
 	}
 	
-	public function _vars($id,$value,$name,$class){
+	public static function _vars($id,$value,$name,$class){
 		$id = 'id="'.($id?htmlentities($id):htmlentities($name)).'" ';
 		$value = 'value="'.htmlentities($value).'" ';
 		$name = 'name="'.htmlentities($name).'" ';
