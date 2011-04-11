@@ -34,9 +34,17 @@
 
 class inc{
 	
-	public function page($module,$data=array()){
+	public static function page($page,$data=array()){
 		ob_start();
-		include(site::root.site::folder.'/pages/'.$module.'.php');
+		$file = site::root.'/_pages/'.$page.'.php';
+		
+		if (file_exists($file)) {
+			include($file);
+		}
+		else {
+			echo error::page_doesnt_exist($page);
+		}
+		
 		$bah = ob_get_contents();
 		ob_end_clean();
 		return $bah;
@@ -51,7 +59,7 @@ class inc{
 	}
 	
 	public static function js($file='common.php',$path='javascript/',$passPath=true){
-		$ret = "<script type='text/javascript' src='".site::url.$path.$file;
+		$ret = "<script src='".site::url.$path.$file;
 		$ret .= "' type='text/javascript'></script>";
 		echo $ret;
 	}

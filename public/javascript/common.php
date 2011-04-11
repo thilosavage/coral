@@ -4,17 +4,18 @@ header("content-type: application/x-javascript");
 // change your js folder if you want:
 $js_folder = 'javascript';
 
-$self = $js_folder.'/'.end(explode('/',$_SERVER['PHP_SELF']));
+$url_parts = explode('/',$_SERVER['PHP_SELF']);
+$self = $js_folder.'/'.end($url_parts);
 $docRoot = str_replace($self,'',$_SERVER['SCRIPT_FILENAME']);
-$docRoot = str_replace('web/','',$docRoot);
+$docRoot = str_replace('public/','',$docRoot);
 
-
-echo "//"; // comment out errors returned by the config
+echo "/*";
 require_once($docRoot.'config.php');
+echo "*/";
 
-$handler = opendir(site::root.'web/'.$js_folder.'/');
+$handler = opendir(site::root.'_js/');
 while ($file = readdir($handler)) {
-	if ($file != '.' && $file != '..' && substr($file,0,1)=="_")
+	if ($file != '.' && $file != '..')
 		$files[] = $file;
 }
 closedir($handler);
@@ -26,7 +27,7 @@ var loader = '<img src="<?php echo site::url;?>images/loader.gif">';
 <?php
 
 foreach ($files as $fileName){
-	$path = site::root.'web/'.$js_folder.'/'.$fileName;
+	$path = site::root.'_js/'.$fileName;
 	
 	ob_start();
 	include($path);

@@ -3,8 +3,11 @@ class database {
     private static $instance;
 
     private function __construct() {
-		self::$instance = mysql_connect(site::db_url,site::db_user,site::db_pass);                                                         
-		mysql_select_db(site::db_name,self::$instance);
+		self::$instance = @mysql_connect(site::db_url,site::db_user,site::db_pass);                                                         
+		@mysql_select_db(site::db_name,self::$instance);
+		if (mysql_error()) {
+			error::mysql_connection(mysql_error());
+		}
 	}
     public static function db(){
         if (!self::$instance){

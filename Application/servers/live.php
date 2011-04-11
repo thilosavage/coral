@@ -13,7 +13,7 @@ class site extends config{
 	const password = 'chicken';
 	
 	const homepage = 'home';
-	const layout = '_default';
+	const layout = 'default';
 	
 	const db_user = '';
 	const db_pass = '';

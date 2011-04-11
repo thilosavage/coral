@@ -1,27 +1,27 @@
 <?php
 header("content-type: application/x-javascript");
 
-// change your js folder if you want:
+// change your css folder if you want:
 $css_folder = 'styles';
 
-$self = $css_folder.'/'.end(explode('/',$_SERVER['PHP_SELF']));
+$url_parts = explode('/',$_SERVER['PHP_SELF']);
+$self = $css_folder.'/'.end($url_parts);
 $docRoot = str_replace($self,'',$_SERVER['SCRIPT_FILENAME']);
-$docRoot = str_replace('web/','',$docRoot);
-
+$docRoot = str_replace('public/','',$docRoot);
 
 echo "/*";
 require_once($docRoot.'config.php');
 echo "*/";
 
-$handler = opendir(site::root.'web/'.$css_folder.'/');
+$handler = opendir(site::root.'_css');
 while ($file = readdir($handler)) {
-	if ($file != '.' && $file != '..' && substr($file,0,1)=="_")
+	if ($file != '.' && $file != '..')
 		$files[] = $file;
 }
 closedir($handler);
 
 foreach ($files as $fileName){
-	$path = site::root.'web/'.$css_folder.'/'.$fileName;
+	$path = site::root.'_css/'.$fileName;
 	
 	ob_start();
 	include($path);

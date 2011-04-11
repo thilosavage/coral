@@ -33,7 +33,7 @@ abstract class Controller {
 		if (substr($this->view,0,5) == "ajax_"){
 		$request = $_SERVER[ 'HTTP_X_REQUESTED_WITH' ];
 		if ($request == 'XMLHttpRequest' || site::debug) {
-				$this->layout = '_ajax';
+				$this->layout = 'ajax';
 			}
 			else {
 				exit("<p>Access denied.</p>");
@@ -54,13 +54,12 @@ abstract class Controller {
 	}
 	
 	protected function render_layout() {
-		$path = site::root.CO_WEB_PATH.'/layouts/'.$this->layout.'.php';
+		$path = site::root.'_layouts/'.$this->layout.'.php';
 		if (file_exists($path)) {
 			include $path;
 		}
 		else {
-			log::error('Layout page not found');
-			exit('Layout not found');
+			echo error::layout_not_found($this->layout);
 		}
 	}
 	
@@ -72,7 +71,7 @@ abstract class Controller {
 			}		
 		}	
 	
-		$ajaxExt = $this->layout=='_ajax'?'/ajax':'';
+		$ajaxExt = $this->layout=='ajax'?'/ajax':'';
 		$path = site::root.'Views/'.$this->controller.$ajaxExt.'/'.str_replace('ajax_','',$this->view).'.php';
 	
 		if (file_exists($path)) {

@@ -1,28 +1,23 @@
 <?php
-
-// if you change this, you'll have to change it 3 times in the .htaccess as well
-define("CO_WEB_PATH","web");
-
 /**********************************************
 
-	$_PROFILES is an array of all the locations of your website
+	$_SERVERS is an array that contains information for all the locations of your project
 	
-	For every server that your site exists, you will have a line here
+	For every server that your project exists, you will have a $_SERVERS line
 	
 	Using this, you can have your website synchronized in ten
-	places and have it work on all of them without annoying ifs
+	places and have it work on all of them without if/thens or subversion ignores
 	
-	To add a profile, add this line:
+	To add an installation, add this line:
 	
-	$_PROFILES['YOUR DOCUMENT ROOT'] = '/path_to_framework/_profiles/your_name.php';
+	$_SERVER['YOUR DOCUMENT ROOT'] = '/path_to_framework/servers/location';
 	
 **********************************************/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////  PUT YOUR CONFIGURATION PATHS HERE  ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$_PROFILES['D:/xampp/htdocs'] = 'local';
-$_PROFILES['/var/www/html'] = 'live';
+$_SERVERS['C:/x/htdocs'] = 'local'; // example
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,15 +33,21 @@ $_AUTOLOAD[] = "Controllers/";
 // load configuration profile
 $docroot = $_SERVER['DOCUMENT_ROOT'];
 
-if (strpos($_SERVER['SCRIPT_FILENAME'],'/'.CO_WEB_PATH.'/')) {
-	$d = "\$web = preg_replace(\"/\/".CO_WEB_PATH."\/([a-zA-Z\/.]*)/\",\"\",\$_SERVER['SCRIPT_FILENAME']);";
-	eval($d);
-	$profile = $web.'/servers/'.$_PROFILES[$docroot].'.php';
+if (empty($_SERVERS[$docroot])) {
+	require_once('Application/error.php');
+	error::run('no_config_file');
 }
+// if a file is being requested in public folder
+else if (strpos($_SERVER['SCRIPT_FILENAME'],'/public/')) {
+	$d = "\$web = preg_replace(\"/\/public\/([a-zA-Z\/.]*)/\",\"\",\$_SERVER['SCRIPT_FILENAME']);";
+	eval($d);
+	$profile = $web.'/Application/servers/'.$_SERVERS[$docroot].'.php';
+}
+// for everything else
 else {
 	$ars = array($docroot,'index.php');
 	$sitepath = str_replace($ars ,'',$_SERVER['SCRIPT_FILENAME']);
-	$profile = $docroot.$sitepath.'servers/'.$_PROFILES[$docroot].'.php';
+	$profile = $docroot.$sitepath.'Application/servers/'.$_SERVERS[$docroot].'.php';
 }
 
 if (file_exists($profile)){

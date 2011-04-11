@@ -32,7 +32,7 @@ class indexController extends Controller {
 	// if your site is bigger than one level
 	// create new controllers for your pages
 	function index(){
-		$this->layout = '_default';
+		$this->layout = 'default';
 		$data['blah'] = '!!!!';
 		$this->vars('data',$data);
 	}

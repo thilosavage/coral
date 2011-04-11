@@ -1,2 +1,2 @@
-
-[log#1233]
+Table 'test.example' doesn't exist
+[log#1774]

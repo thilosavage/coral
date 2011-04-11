@@ -10,8 +10,8 @@
 	
 	C - create - see the save() method
 	R - retrieve - see the load() method
-	U - update - also see the save() method
-	D - delete - see the delete method
+	U - update - also done with the save() method
+	D - delete - see the delete() method
 
 	Everything else is just helping these four things
 	
@@ -281,7 +281,7 @@ abstract class Model {
 			}
 		}
 		$id_field = $this->field?$this->field:$this->id_field;
-		if ($this->set[$id_field]) {
+		if (!empty($this->set[$id_field])) {
 			$this->_update();
 			return $this->set[$this->id_field];
 		}
@@ -356,6 +356,7 @@ abstract class Model {
 	
 	// build the query
 	function _build(){
+		$qe = '';
 		if (!$this->logic && is_array($this->values)){
 			$this->logic = 'OR';
 			while (list($fieldName,$fieldValue) = each($this->values)){
@@ -397,10 +398,7 @@ abstract class Model {
 		$database = database::db();
 		$insert = 'INSERT INTO `'.$this->_esc($this->table).'` SET '.$this->_fields();
 		$database->query($insert);
-		
 		$this->query = $insert;
-		
-		return $ret;
 	}
 	
 	// updates row in database
@@ -410,11 +408,11 @@ abstract class Model {
 		$update .= sprintf(' WHERE '.$this->_esc($this->id_field).'=%s', $this->_esc($this->set[$this->id_field]));
 		$database->query($update);
 		$this->query = $update;
-		return $ret;
 	}
 	
 	// generate sql fields
 	function _fields(){
+		$fields = '';
 		while (list ($fieldName, $fieldValue) = each($this->set)) {
 			if (!is_numeric($fieldName)){
 				if (!strcmp($fieldName, $this->id_field)) {

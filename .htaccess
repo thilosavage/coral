@@ -8,19 +8,16 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} (.+)/images/.+$ [NC]
-RewriteRule ^(.*)$ /%1/web/$1 [NC,L]
+RewriteRule ^(.*)$ /%1/public/$1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} (.+)/javascript/.+$ [NC]
-RewriteRule ^(.*)$ /%1/web/$1 [NC,L]
+RewriteRule ^(.*)$ /%1/public/$1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} (.+)/styles/.+$ [NC]
-RewriteRule ^(.*)$ /%1/web/$1 [NC,L]
+RewriteRule ^(.*)$ /%1/public/$1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [NC,L]
-
-
-#http://localhost/coral/images/loader.gif

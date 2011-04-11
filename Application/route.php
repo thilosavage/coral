@@ -14,7 +14,7 @@ class route {
 		$this->full = $this->route;
 		$urlArgs = explode('/', $this->route);
 		$this->controller = ($urlArgs[0])?$urlArgs[0]:'';
-		$this->view = (@$urlArgs[1])?$urlArgs[1]:'index';
+		$this->view = (@$urlArgs[1])?$urlArgs[1]:'home';
 		if (isset($urlArgs[2])){
 			$hasID = explode("?",$urlArgs[2]);
 			$this->id = ($hasID[0])?$hasID[0]:'';
@@ -41,16 +41,7 @@ class route {
 		}
 		
 		if (!$filtered){
-			echo "<p>Your configuration profile is working, but there is an error in your settings</p>";
-			echo "<p>Open the configuration profile for this installation of Coral (i.e. _profiles/local.php)</p>";
-			echo "<p>Check your site constant and make sure it's the url to your site, including the path to your site</p>";
-			echo "<p>Example:<br>";
-			echo "const url = 'http://localhost/newsite/'<br>";
-			echo "or<br>";
-			echo "const url = 'http://www.yoursite.com'<br>";
-			echo "(include the http://www)</p>";
-			echo "<a href='http://www.thilosavage.com/coral/installation' target='_blank'>Read Documentation</a>";
-			exit;
+			error::url_error();
 		}
 
 		return $pageURL;
