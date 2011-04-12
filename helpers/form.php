@@ -26,7 +26,7 @@ class form {
 		return '<form action="'.$action.'" '.$method.$multipart.$extra.'>';
 	}
 	
-	public static function checkbox($name,$value,$check='',$extra='',$id='') {
+	public static function checkbox($name,$value,$check='',$class='',$extra='',$id='') {
 		$checked = (($check==='' && $_POST[$name]) || $check)?' checked':'';
 		return '<input type="checkbox" '.self::_vars($id,$value,$name, $class).$extra.$checked.'>';
 	}

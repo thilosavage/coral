@@ -6,6 +6,7 @@ class route {
 	var $controller = '';
 	var $action = '';
 	var $id = '';
+	var $arg = '';
 	var $full = '';
 	public function __construct() {
 	
@@ -38,6 +39,7 @@ class route {
 		if (!$this->controller || !class_exists($this->controller.'Controller')) {
 
 			$this->id = $this->controller?$this->controller:site::homepage;
+			$this->arg = $this->action;
 			$this->action = 'index';
 			$this->controller = 'index';
 

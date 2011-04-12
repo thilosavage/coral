@@ -16,6 +16,7 @@ abstract class Controller {
 
 	var $route = '';
 	var $id = '';
+	var $arg = '';
 	var $vars = array();	
 	var $view = '';
 	var $layout = site::layout;
@@ -25,6 +26,7 @@ abstract class Controller {
 		$this->controller = $route->controller;
 		$this->action = $route->action;
 		$this->id = $route->id;
+		$this->arg = $route->arg;
 	}      
 
 	public function run() {

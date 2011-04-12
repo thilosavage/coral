@@ -7,6 +7,13 @@
 	
 	Why bother?
 	
+	All the CSS files in this folder will be included when
+	you call
+	
+	echo inc::css();
+	
+	which will probably be in your layout
+	
 **********************************************/
 ?>
 <style>

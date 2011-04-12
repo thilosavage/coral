@@ -12,7 +12,7 @@
 **********************************************/
 
 function exampleQuoteLoad(){
-	// siteUrl is set in js.php
+	// siteUrl is set in /public/javascipt/common.php
 	// all PHP ajax actions are appended by ajax_
 	$.post(siteUrl+'example/ajax_exampleQuoteLoad',function(data){
 		$('#quote').html(data.quote);
