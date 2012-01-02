@@ -12,12 +12,18 @@
 	
 	$_SERVER['YOUR DOCUMENT ROOT'] = '/path_to_framework/servers/location';
 	
+	TO DISABLE THIS FEATURE
+	DELETE ALL $_SERVERS LINES
+	AND THE SCRIPT WILL USE
+	Application/servers/local.php
+	ON ALL INSTALLATIONS
+	
 **********************************************/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////  PUT YOUR CONFIGURATION PATHS HERE  ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$_SERVERS['C:/xampp/htdocs'] = 'local'; // example
+$_SERVERS['C:/xampp/htddocs'] = 'local'; // example
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +38,16 @@ $_AUTOLOAD[] = "Controllers/";
 
 
 // load configuration profile
-$docroot = $_SERVER['DOCUMENT_ROOT'];
+// if no config paths are set, load local
+if (!empty($_SERVERS)) {
+	$docroot = $_SERVER['DOCUMENT_ROOT'];
+}
+else {
+	// bypass this feature
+	$docroot = '';
+	$_SERVERS[''] = 'local';
+}
+
 
 if (empty($_SERVERS[$docroot])) {
 	error::run('no_config_file');
@@ -49,6 +64,7 @@ else {
 	$sitepath = str_replace($ars ,'',$_SERVER['SCRIPT_FILENAME']);
 	$profile = $docroot.$sitepath.'Application/servers/'.$_SERVERS[$docroot].'.php';
 }
+
 
 if (file_exists($profile)){
 	require_once($profile);

@@ -17,7 +17,7 @@ class error {
 		
 		echo "const root = '".$_SERVER['DOCUMENT_ROOT'].$script."';<br>";
 		echo "(include the trailing slash)</p>";
-		echo "<a href='http://www.thilosavage.com/coral/installation' target='_blank'>Read Documentation</a>";
+		echo "<a href='http://coral.thilosavage.com/documentation/config.php' target='_blank'>Read Documentation</a>";
 		exit;
 	}
 	
@@ -31,7 +31,7 @@ class error {
 		
 		echo "const root = '".$_SERVER['DOCUMENT_ROOT'].$script."';<br>";
 		echo "(include the trailing slash)</p>";
-		echo "<a href='http://www.thilosavage.com/coral/installation' target='_blank'>Read Documentation</a>";
+		echo "<a href='http://coral.thilosavage.com/documentation/config.php' target='_blank'>Read Documentation</a>";
 		exit;
 	}
 	
@@ -43,7 +43,7 @@ class error {
 		$script = str_replace('index.php','',$script);
 
 		echo "<em>\$_SERVERS['".$_SERVER['DOCUMENT_ROOT']."'] = 'local';</em></p>";
-		echo "<a href='http://www.thilosavage.com/coral/installation' target='_blank'>Read Documentation</a>";
+		echo "<a href='http://coral.thilosavage.com/documentation/config.php' target='_blank'>Read Documentation</a>";
 		exit;
 	}
 	
