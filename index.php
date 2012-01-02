@@ -1,11 +1,14 @@
 <?php 
 session_start();  
 
-// require autoload
-require_once('Application/__autoload.php');
+// require error reporting
+require_once('Application/error.php');
 
 // require config
 require_once('config.php');
+
+// require autoload
+require_once('Application/__autoload.php');
 
 if (!class_exists('log')){
 	error::run('settings_error');

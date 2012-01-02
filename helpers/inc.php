@@ -50,6 +50,14 @@ class inc{
 		return $bah;
 	}
 
+	public static function module($module,$data=array()){
+		ob_start();
+		include(site::root.'_modules/'.$module.'.php');
+		$bah = ob_get_contents();
+		ob_end_clean();
+		return $bah;
+	}	
+	
 	public static function form($form,$data=array()){
 		ob_start();
 		include(site::root.'_forms/'.$form.'.php');

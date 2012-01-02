@@ -6,7 +6,7 @@
 **********************************************/
 class site extends config{
 	const url = 'http://localhost/coral/';
-	const root = 'C:/x/htdocs/coral/';
+	const root = 'C:/xampp/htdocs/coral/';
 	const image = 'http://localhost/coral/images/';
 	
 	const user = 'admin';
